@@ -25,12 +25,6 @@ public class OrdersService {
         .collect(Collectors.toList());
     }
 
-    // public List<OrderDTO> getByName(String name){
-    //         return productsRepository.findMovieByTitle(name).stream()
-    //         .map(x->modelMappper.map(x, OrderDTO.class))
-    //         .collect(Collectors.toList());
-    // }
-
     public OrderDTO add(OrderDTO order){
         OrderEntity entityToInsert = modelMappper.map(order, OrderEntity.class);
         OrderEntity result = ordersRepository.save(entityToInsert);

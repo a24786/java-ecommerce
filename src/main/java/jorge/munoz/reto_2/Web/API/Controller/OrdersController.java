@@ -32,26 +32,25 @@ public class OrdersController {
     }
 
     @GetMapping("/{id}")
-    public OrderDTO getMovieDetailbyID(@PathVariable("id") Long id) {
+    public OrderDTO getOrderbyID(@PathVariable("id") Long id) {
         return ordersService.findbyId(id);
     }
 
     /*
     CRUD METHODS
     */
-    @PostMapping("/movie")
-    public OrderDTO AddUser(@RequestBody OrderDTO movie) {
-        return ordersService.add(movie);
+    @PostMapping()
+    public OrderDTO AddOrder(@RequestBody OrderDTO order) {
+        return ordersService.add(order);
     }
 
     @PutMapping("/update/{id}")
-    public Optional<OrderDTO> UpdateUser(@RequestBody OrderDTO movie, @PathVariable("id") Long id) {
-        //Mejor hacer un if y si no hay nada, return null o error correspondiente. 
-        return ordersService.update(id, movie);
+    public Optional<OrderDTO> UpdateOrder(@RequestBody OrderDTO order, @PathVariable("id") Long id) {
+        return ordersService.update(id, order);
     }
 
     @DeleteMapping("/delete/{id}")
-    public void DeleteMovie (@PathVariable("id") Long id) {
+    public void DeleteOrder (@PathVariable("id") Long id) {
         ordersService.delete(id);
     }
 

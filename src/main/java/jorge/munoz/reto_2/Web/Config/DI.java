@@ -11,7 +11,7 @@ import jorge.munoz.reto_2.Services.ProductsService;
 @Configuration
 public class DI {
     @Bean
-    ProductsService createUsersService(){
+    ProductsService createProductService(){
         return new ProductsService();
     }
 
