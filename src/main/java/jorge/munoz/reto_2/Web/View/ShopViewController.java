@@ -13,13 +13,15 @@ import jorge.munoz.reto_2.Services.ProductsService;
 @Controller
 @RequestMapping("products")
 public class ShopViewController {
-    // private final ProductsService productsService;
-    // private final OrderProductsService orderproductsService;
-    // private final OrdersService ordersService;
+    private final ProductsService productsService;
+    private final OrderProductsService orderproductsService;
+    private final OrdersService ordersService;
 
-    // ShopViewController(ProductsService productsService){
-    //     this.productsService = productsService;
-    // }
+    ShopViewController(ProductsService productsService, OrderProductsService orderproductsService, OrdersService ordersService ){
+        this.productsService = productsService;
+        this.orderproductsService = orderproductsService;
+        this.ordersService = ordersService;
+    }
 
     // @GetMapping("/home")
     // public ModelAndView loadDetail(){
