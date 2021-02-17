@@ -12,12 +12,14 @@ public class OrderProductEntity {
     
     private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Long id;
     private Long id_product;
+    private Double qty;
     private Long id_order;
 
     public OrderProductEntity(){}
 
-    public OrderProductEntity(Long id_product, Long id_order) {
+    public OrderProductEntity(Long id_product, Double qty, Long id_order) {
         this.id_product = id_product;
+        this.qty = qty;
         this.id_order = id_order;
     }
 
@@ -35,6 +37,15 @@ public class OrderProductEntity {
 
     public void setId_product(Long id_product) {
         this.id_product = id_product;
+    }
+
+
+    public Double getQty() {
+        return this.qty;
+    }
+
+    public void setQty(Double qty) {
+        this.qty = qty;
     }
 
     public Long getId_order() {

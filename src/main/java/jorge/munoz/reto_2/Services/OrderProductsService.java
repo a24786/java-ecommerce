@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import jorge.munoz.reto_2.Repositories.Entities.OrderProductEntity;
 import jorge.munoz.reto_2.Repositories.Interfaces.OrderProductsRepository;
 import jorge.munoz.reto_2.Services.Models.OrderProductDTO;
+import jorge.munoz.reto_2.Services.Models.ProductDTO;
 
 
 public class OrderProductsService {
@@ -58,5 +59,19 @@ public class OrderProductsService {
             return null;
         }
     }
+
+    public List<ProductDTO> findByOrderId(Long id){
+        List<ProductDTO> a = orderProductsRepository.findByOrderId(id).stream()
+        .map(x -> modelMappper.map(x, ProductDTO.class))
+        .collect(Collectors.toList());
+
+        return a;
+    }
+
+    // public Long getTotalPriceByOrder(Long id){
+    //      orderProductsRepository.findByOrderId(id).stream()
+    //     .map(x -> modelMappper.map(x, OrderProductDTO.class))
+    //     .collect(Collectors.toList());
+    // }
 
 }

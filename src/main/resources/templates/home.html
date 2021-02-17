@@ -18,13 +18,14 @@
             <div class="col-8 productsGrid container-sm w-75 d d-flex flex-sm-wrap justify-content-between mt-5 mr-0 ml-0">
                 <div th:each="product : ${products}" th:object="${product}" class="card d d-flex mb-5 ml-3 mr-3" style="width: 30%;">
                     <!-- <div th:each="orderProduct : ${ordersProduct}" th:object="${orderProduct}" class="productListCards"> -->
-                    <img class="card-img-top image-card" th:src="@{${product.url_product}}" alt="Card image">
-                    <div class="card-body">
-                        <h5 th:text="${product.name}" class="card-title"></h5>
-                        <p th:text="${product.price}+€" class="card-text"></p>
-                        <button class="btn btn-primary" th:text="#{add.cart}" th:onclick="'javascript:addNewProduct(' + ${product.id_product} + ')'"></button>
+                    <div class="productListCards">
+                        <img class="card-img-top image-card" th:src="@{${product.url_product}}" alt="Card image">
+                        <div class="card-body">
+                            <h5 th:text="${product.name}" class="card-title"></h5>
+                            <p th:text="${product.price}+€" class="card-text"></p>
+                            <button class="btn btn-primary" th:text="#{add.cart}"></button>
+                        </div>
                     </div>
-                    <!-- </div> -->
                 </div>
             </div>
 
@@ -37,17 +38,17 @@
                         <i class="deleteCart fa fa-trash" th:onclick="'javascript:deleteCompleteOrder(3)'"></i>
                     </div>
                     <div th:each="orderProduct : ${ordersProduct}" th:object="${orderProduct}" class="productListCards ">
-                        <p th:text="*{product.name} " class="font-weight-bold "></p>
+                        <p th:text="*{name} " class="font-weight-bold "></p>
                         <div class="selector ">
-                            <button type="button " name="less " class="less " th:onclick=" 'javascript:removeProduct(' + ${orderProduct.product.id_product} + ')' ">-</button>
-                            <p th:text="*{quantity} " class="qtyNumber "></p>
-                            <button type="button " name="plus " class="plus " th:onclick=" 'javascript:addProduct(' + ${orderProduct.product.id_product} + ')' ">+</button>
+                            <button type="button " name="less" class="less ">-</button>
+                            <p th:text="qty" class="qtyNumber "></p>
+                            <button type="button " name="plus" class="plus ">+</button>
                         </div>
-                        <div class="totalAmout" th:with="total=${orderProduct.quantity * orderProduct.product.price}">
+                        <div class="totalAmout" th:text="totalPrice">
                             <p th:text="${#numbers.formatDecimal(total, 1, 'DEFAULT', 2, 'DEFAULT')}+€" th:with="totalCount=${total + total}"></p>
                         </div>
                         <div class="wraperCross">
-                            <i th:if="${orderProduct.quantity gt 1}" class="fa fa-times crossDelete" th:onclick=" 'javascript:deleteProducts(' + ${orderProduct.id_orderproduct} + ')' "></i>
+                            <!-- <i th:if="${orderProduct.quantity gt 1}" class="fa fa-times crossDelete" th:onclick=" 'javascript:deleteProducts(' + ${orderProduct.id_orderproduct} + ')' "></i> -->
                         </div>
                     </div>
                     <div class="h5 mt-2 mb-4 pt-3 wrapperTotalPrice" th:object="${totalAmountPrice}">

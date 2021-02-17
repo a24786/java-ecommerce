@@ -23,15 +23,17 @@ public class ShopViewController {
         this.ordersService = ordersService;
     }
 
-    // @GetMapping("/home")
-    // public ModelAndView loadDetail(){
-    //     ModelAndView mv = new ModelAndView("home");
-    //     mv.addObject("products", ProductsController.productsList);
-    //     mv.addObject("ordersProduct", OrdersProductsController.findOrderProductbyIdOrder(3));
-    //     mv.addObject("totalAmountPrice", OrdersProductsController.calculateTotalPrice(3));
-    //     return mv;
-    // }
+    @GetMapping("/home")
+    public ModelAndView loadDetail(){
+        ModelAndView mv = new ModelAndView("home");
+        mv.addObject("products", productsService.getAll());
+        mv.addObject("ordersProduct", orderproductsService.findByOrderId(3L));
+       // mv.addObject("totalAmountPrice", orderproductsService.calculateTotalPrice(3));
+        return mv;
+    }
 
+
+    // Password1
 
 
 }
