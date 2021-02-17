@@ -6,21 +6,21 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Table(name = "OrderProducts")
-@Entity(name="OrderProducts")
+@Table(name = "Orderproducts")
+@Entity(name="Orderproducts")
 public class OrderProductEntity {
     
     private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Long id;
-    private Long id_product;
+    private Long idProduct;
     private Double qty;
-    private Long id_order;
+    private Long idOrder;
 
     public OrderProductEntity(){}
 
-    public OrderProductEntity(Long id_product, Double qty, Long id_order) {
-        this.id_product = id_product;
+    public OrderProductEntity(Long idProduct, Double qty, Long idOrder) {
+        this.idProduct = idProduct;
         this.qty = qty;
-        this.id_order = id_order;
+        this.idOrder = idOrder;
     }
 
     public Long getId() {
@@ -31,14 +31,14 @@ public class OrderProductEntity {
         this.id = id;
     }
 
-    public Long getId_product() {
-        return this.id_product;
+
+    public Long getIdProduct() {
+        return this.idProduct;
     }
 
-    public void setId_product(Long id_product) {
-        this.id_product = id_product;
+    public void setIdProduct(Long idProduct) {
+        this.idProduct = idProduct;
     }
-
 
     public Double getQty() {
         return this.qty;
@@ -48,12 +48,12 @@ public class OrderProductEntity {
         this.qty = qty;
     }
 
-    public Long getId_order() {
-        return this.id_order;
+    public Long getIdOrder() {
+        return this.idOrder;
     }
 
-    public void setId_order(Long id_order) {
-        this.id_order = id_order;
+    public void setIdOrder(Long idOrder) {
+        this.idOrder = idOrder;
     }
 
     

@@ -3,8 +3,8 @@ package jorge.munoz.reto_2.Services.Models;
 public class OrderDTO {
     private Long id;
     private String fe_creacion;
-    private String user;
     private String state;
+    private String user_reto;
 
 
     public Long getId() {
@@ -23,20 +23,21 @@ public class OrderDTO {
         this.fe_creacion = fe_creacion;
     }
 
-    public String getUser() {
-        return this.user;
-    }
-
-    public void setUser(String user) {
-        this.user = user;
-    }
-
     public String getState() {
         return this.state;
     }
-
+    
     public void setState(String state) {
         this.state = state;
+    }
+    
+
+    public String getUser_reto() {
+        return this.user_reto;
+    }
+
+    public void setUser_reto(String user_reto) {
+        this.user_reto = user_reto;
     }
     
     

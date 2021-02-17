@@ -6,22 +6,22 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Table(name = "Orders")
-@Entity(name="Orders")
+@Table(name = "Ordersreto")
+@Entity(name= "Ordersreto")
 public class OrderEntity {
     
     private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Long id;
     private String fe_creacion;
-    private String user;
     private String state;
+    private String user_reto;
 
     public OrderEntity(){}
     
 
-    public OrderEntity(String fe_creacion, String user, String state) {
+    public OrderEntity(String fe_creacion, String state, String user_reto) {
         this.fe_creacion = fe_creacion;
-        this.user = user;
         this.state = state;
+        this.user_reto = user_reto;
     }
     
 
@@ -41,21 +41,20 @@ public class OrderEntity {
         this.fe_creacion = fe_creacion;
     }
 
-    public String getUser() {
-        return this.user;
-    }
-
-    public void setUser(String user) {
-        this.user = user;
-    }
-
     public String getState() {
         return this.state;
     }
-
-    public void setState(String status) {
-        this.state = status;
+    
+    public void setState(String state) {
+        this.state = state;
+    }
+    
+    public String getUser() {
+        return this.user_reto;
     }
 
+    public void setUser(String user_reto) {
+        this.user_reto = user_reto;
+    }
 
 }

@@ -6,8 +6,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Table(name = "Products")
-@Entity(name="Products")
+@Table(name = "Productsreto")
+@Entity(name= "Productsreto")
 public class ProductEntity {
     
     private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Long id;
