@@ -1,0 +1,93 @@
+.selector {
+  display: flex;
+  margin: auto;
+  margin-top: 0px;
+  width: fit-content;
+  padding: 2%;
+  height: 40px;
+}
+
+.less {
+  height: min-content;
+}
+.less:hover {
+  background-color: #dfdfdf;
+  margin-top: 2px;
+}
+
+.qtyNumber {
+  margin: 0 10px 0;
+}
+
+.plus {
+  height: min-content;
+}
+.plus:hover {
+  background-color: #dfdfdf;
+  margin-top: 2px;
+}
+
+.totalAmout {
+  width: 20%;
+}
+
+.productListCards {
+  flex-wrap: wrap;
+  display: flex;
+  margin: auto;
+  padding: 3%;
+}
+.productListCards p:first-child {
+  width: 30%;
+}
+
+.image-card {
+  width: 100%;
+  height: 50%;
+  margin-bottom: 10px;
+}
+
+.wraperCross {
+  width: 5%;
+  margin: 0 2px 0;
+}
+
+.crossDelete {
+  cursor: pointer;
+}
+.crossDelete:hover {
+  margin-top: 2px;
+}
+
+.wrapperTitleCart {
+  display: flex;
+}
+.wrapperTitleCart .titleCart {
+  width: 80%;
+  font-size: x-large;
+}
+.wrapperTitleCart .deleteCart {
+  width: 20%;
+  margin-top: 5px;
+  cursor: pointer;
+}
+.wrapperTitleCart .deleteCart:hover {
+  margin-top: 7px;
+}
+
+.wrapperTotalPrice {
+  margin: 5px 0 5px;
+  padding-bottom: 15px;
+  border-top: 1px solid black;
+  text-align: center;
+  display: flex;
+  align-items: center;
+}
+.wrapperTotalPrice .totalTitle {
+  width: 50%;
+}
+.wrapperTotalPrice .totalPrice {
+  width: 50%;
+}
+
+/*# sourceMappingURL=home.css.map */

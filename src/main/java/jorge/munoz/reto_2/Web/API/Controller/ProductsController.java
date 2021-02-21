@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import jorge.munoz.reto_2.Services.ProductsService;
@@ -21,39 +20,38 @@ import org.springframework.web.bind.annotation.RequestBody;
 @RestController
 @RequestMapping("products/v1")
 public class ProductsController {
-    private final ProductsService moviesService;
+    private final ProductsService productsService;
 
-    ProductsController(ProductsService moviesService){
-        this.moviesService = moviesService;
+    ProductsController(ProductsService productsService){
+        this.productsService = productsService;
     }
 
     @GetMapping()
     public List<ProductDTO> GetProduct(){
-        return moviesService.getAll();
+        return productsService.getAll();
     }
 
     @GetMapping("/{id}")
-    public ProductDTO getMovieDetailbyID(@PathVariable("id") Long id) {
-        return moviesService.findbyId(id);
+    public ProductDTO getProductbyID(@PathVariable("id") Long id) {
+        return productsService.findbyId(id);
     }
 
     /*
     CRUD METHODS
     */
-    @PostMapping("/movie")
-    public ProductDTO AddUser(@RequestBody ProductDTO movie) {
-        return moviesService.add(movie);
+    @PostMapping()
+    public ProductDTO AddProduct(@RequestBody ProductDTO product) {
+        return productsService.add(product);
     }
 
     @PutMapping("/update/{id}")
-    public Optional<ProductDTO> UpdateUser(@RequestBody ProductDTO movie, @PathVariable("id") Long id) {
-        //Mejor hacer un if y si no hay nada, return null o error correspondiente. 
-        return moviesService.update(id, movie);
+    public Optional<ProductDTO> UpdateProduct(@RequestBody ProductDTO product, @PathVariable("id") Long id) {
+        return productsService.update(id, product);
     }
 
     @DeleteMapping("/delete/{id}")
-    public void DeleteMovie (@PathVariable("id") Long id) {
-        moviesService.delete(id);
+    public void DeleteProduct (@PathVariable("id") Long id) {
+        productsService.delete(id);
     }
 
 }

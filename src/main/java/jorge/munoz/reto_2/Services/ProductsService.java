@@ -25,23 +25,18 @@ public class ProductsService {
         .collect(Collectors.toList());
     }
 
-    // public List<ProductDTO> getByName(String name){
-    //         return productsRepository.findMovieByTitle(name).stream()
-    //         .map(x->modelMappper.map(x, ProductDTO.class))
-    //         .collect(Collectors.toList());
-    // }
 
-    public ProductDTO add(ProductDTO user){
-        ProductEntity entityToInsert = modelMappper.map(user, ProductEntity.class);
+    public ProductDTO add(ProductDTO product){
+        ProductEntity entityToInsert = modelMappper.map(product, ProductEntity.class);
         ProductEntity result = productsRepository.save(entityToInsert);
         return modelMappper.map(result, ProductDTO.class);
     }
 
-    public Optional<ProductDTO> update(Long ID, ProductDTO movie){
+    public Optional<ProductDTO> update(Long ID, ProductDTO product){
         Optional<ProductEntity> dataToUpdate = productsRepository.findById(ID);
         if(dataToUpdate.isPresent()){
             if(dataToUpdate.get().getId() == ID){
-                ProductEntity entityToUpdate = modelMappper.map(movie, ProductEntity.class);
+                ProductEntity entityToUpdate = modelMappper.map(product, ProductEntity.class);
                 entityToUpdate.setId(ID);
                 ProductEntity result = productsRepository.save(entityToUpdate);
                 return Optional.of(modelMappper.map(result, ProductDTO.class));

@@ -1,0 +1,26 @@
+<html xmlns="http://www.thymeleaf.org">
+
+
+<head>
+    <script>
+        function reload() {
+            var e = document.getElementById("languages");
+            var selectedLang = e.options[e.selectedIndex].value;
+
+            var url = "?lang=" + selectedLang
+            location.href = url;
+        }
+    </script>
+
+</head>
+
+<body>
+    <select class="m-3 rounded-sm text-left fixed-bottom text-right text-wrap p-1" id="languages" onchange="reload();">
+        <option value="th:text=#{button.language}" th:text="#{button.language}" class="p-1" selected></option>
+        <option value="en" th:text="#{lang.en}"></option>
+        <option value="es" th:text="#{lang.es}"></option>
+    </select>
+
+</body>
+
+</html>
