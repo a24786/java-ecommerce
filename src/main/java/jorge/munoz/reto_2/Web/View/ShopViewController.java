@@ -28,12 +28,24 @@ public class ShopViewController {
         ModelAndView mv = new ModelAndView("home");
         mv.addObject("products", productsService.getAll());
         mv.addObject("ordersProduct", orderproductsService.findByOrderId(3L));
-       // mv.addObject("totalAmountPrice", orderproductsService.calculateTotalPrice(3));
+       mv.addObject("totalAmountPrice", orderproductsService.getTotalPriceByOrder(3L));
         return mv;
     }
 
 
     // Password1
 
+//     SELECT 
+// (select qty)
+// from orderproducts
+//   join productsreto
+//     on productsreto.id = 2
+// where orderproducts.id_product = productsreto.id) 
+// * 
+// (select sum(price)
+// from productsreto
+//   join orderproducts
+//     on orderproducts.id = 2
+// where orderproducts.id_product = productsreto.id)
 
 }

@@ -68,10 +68,15 @@ public class OrderProductsService {
         return a;
     }
 
-    // public Long getTotalPriceByOrder(Long id){
-    //      orderProductsRepository.findByOrderId(id).stream()
-    //     .map(x -> modelMappper.map(x, OrderProductDTO.class))
-    //     .collect(Collectors.toList());
+    public Long getTotalPriceByOrder(Long id){
+        return orderProductsRepository.countTotalPrice(3L).stream()
+        .findFirst().get();
+    }
+
+    // public Long getTotalQty(Long id){
+    //     return orderProductsRepository.countTotalPrice(3).stream()
+    //     .findFirst().get();
     // }
+    
 
 }
