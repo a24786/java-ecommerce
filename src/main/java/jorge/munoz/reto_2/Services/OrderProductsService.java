@@ -60,13 +60,13 @@ public class OrderProductsService {
         }
     }
 
-    public List<ProductDTO> findByOrderId(Long id){
-        List<ProductDTO> a = orderProductsRepository.findByOrderId(id).stream()
-        .map(x -> modelMappper.map(x, ProductDTO.class))
-        .collect(Collectors.toList());
+    // public List<ProductDTO> findByOrderId(Long id){
+    //     List<ProductDTO> a = orderProductsRepository.findByOrderId(id).stream()
+    //     .map(x -> modelMappper.map(x, ProductDTO.class))
+    //     .collect(Collectors.toList());
 
-        return a;
-    }
+    //     return a;
+    // }
 
     // public Long getTotalPriceByOrder(Long id){
     //      orderProductsRepository.findByOrderId(id).stream()

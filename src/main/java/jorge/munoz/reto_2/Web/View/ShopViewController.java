@@ -27,7 +27,7 @@ public class ShopViewController {
     public ModelAndView loadDetail(){
         ModelAndView mv = new ModelAndView("home");
         mv.addObject("products", productsService.getAll());
-        mv.addObject("ordersProduct", orderproductsService.findByOrderId(3L));
+        // mv.addObject("ordersProduct", orderproductsService.findByOrderId(3L));
        // mv.addObject("totalAmountPrice", orderproductsService.calculateTotalPrice(3));
         return mv;
     }
