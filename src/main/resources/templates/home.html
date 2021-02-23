@@ -23,7 +23,7 @@
                         <div class="card-body">
                             <h5 th:text="${product.name}" class="card-title"></h5>
                             <p th:text="${product.price}+€" class="card-text"></p>
-                            <button class="btn btn-primary" th:text="#{add.cart}"></button>
+                            <button class="btn btn-primary" th:text="#{add.cart}" th:onclick="'javascript:addNewProduct(' + ${product.id} + ')'"></button>
                         </div>
                     </div>
                 </div>

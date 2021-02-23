@@ -3,7 +3,7 @@ package jorge.munoz.reto_2.Services.Models;
 public class OrderProductDTO {
     private Long id;
     private Long idProduct;
-    private Double qty;
+    private int qty;
     private Long idOrder;
 
     public Long getId() {
@@ -24,11 +24,11 @@ public class OrderProductDTO {
     }
 
 
-    public Double getQty() {
+    public int getQty() {
         return this.qty;
     }
 
-    public void setQty(Double qty) {
+    public void setQty(int qty) {
         this.qty = qty;
     }
 

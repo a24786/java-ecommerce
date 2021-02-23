@@ -22,10 +22,11 @@ public class InitDB {
             for(int i = 1; i<=10; i++){   
                 productsRepository.save(new ProductEntity("casa"+i, 100+i, "https://picsum.photos/200/300"));
                 ordersRepository.save(new OrderEntity("12/01/1998", "Enviado", "Jorge"));
-                orderProductsRepository.save(new OrderProductEntity(a,123.4, b));
+                orderProductsRepository.save(new OrderProductEntity(a,3,b));
                 a++;
                 b++;
             }
+            orderProductsRepository.save(new OrderProductEntity(2L,2,3L));
             
         };
     }
