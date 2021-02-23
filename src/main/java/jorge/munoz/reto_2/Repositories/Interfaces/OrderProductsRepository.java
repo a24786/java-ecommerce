@@ -12,8 +12,8 @@ import jorge.munoz.reto_2.Repositories.Entities.ProductEntity;
 public interface OrderProductsRepository 
     extends JpaRepository<OrderProductEntity, Long> {
 
-        @Query(value = "SELECT SUM(p.price*op.qty) FROM Productsreto p JOIN Orderproducts op ON op.idProduct = p.id where p.id =:idProduct")
-        Collection<Long> countTotalPrice(@Param("idProduct")Long idProduct);
+        @Query(value = "SELECT SUM(p.price*op.qty) FROM Productsreto p JOIN Orderproducts op ON op.idProduct = p.id where op.id =:idOrder")
+        Collection<Long> countTotalPrice(@Param("idOrder")Long idOrder);
 
         // @Query(value = "SELECT op.qty, op.idProduct from Orderproducts op join Productsreto p on p.id =:idProduct where op.idProduct = p.id")
         // Collection<Long> countTotalItem(@Param("idProduct")Long idProduct);

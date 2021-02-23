@@ -60,22 +60,26 @@ function getBodyProduct(id) {
 
 function addNewProduct(id_product) {
 
-    let url = 'http://localhost:9292/oders/3/product'
+    let url = 'http://localhost:8081/orderproducts/v1/orderproduct'
 
-    fetch('http://localhost:9292/products/' + id_product)
+    fetch('http://localhost:8081/products/v1/' + id_product)
         .then(res => respones = res.json())
         .then(data => {
-
+            var productID = data.id;
+            var orderID = 3;
+            var qty = 1;
             fetch(url, {
                 method: 'POST',
-                body: JSON.stringify(data),
+                body: JSON.stringify({ "idProduct": 1, "qty": 1, "idOrder": orderID }),
                 headers: {
                     'Content-Type': 'application/json'
                 }
             }).then(res => {
-                window.location.href = "/home";
+                location.reload();
             });
+
         })
+        .catch(error => console.log(error));
 
 }
 
