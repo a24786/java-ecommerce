@@ -1,5 +1,6 @@
 package jorge.munoz.reto_2.Services;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import jorge.munoz.reto_2.Repositories.Entities.OrderProductEntity;
 import jorge.munoz.reto_2.Repositories.Interfaces.OrderProductsRepository;
+import jorge.munoz.reto_2.Services.Models.AuxDTO;
 import jorge.munoz.reto_2.Services.Models.OrderProductDTO;
 import jorge.munoz.reto_2.Services.Models.ProductDTO;
 
@@ -73,10 +75,14 @@ public class OrderProductsService {
         .findFirst().get();
     }
 
-    // public Long getTotalQty(Long id){
-    //     return orderProductsRepository.countTotalPrice(3).stream()
-    //     .findFirst().get();
-    // }
+    public List<AuxDTO> getCartData(Long id){
+        Collection<Object[]> a = orderProductsRepository.getCartData(3L);
+
+        List<AuxDTO> e = a.stream()
+        .map(x->new AuxDTO( (String) x[0], (int)x[1], (double)x[2]))
+        .collect(Collectors.toList());
+        return e;
+    }
     
 
 }

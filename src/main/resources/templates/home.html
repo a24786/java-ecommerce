@@ -41,14 +41,15 @@
                         <p th:text="*{name} " class="font-weight-bold "></p>
                         <div class="selector ">
                             <button type="button " name="less" class="less ">-</button>
-                            <p th:text="qty" class="qtyNumber "></p>
+                            <p th:text="*{qty}" class="qtyNumber "></p>
                             <button type="button " name="plus" class="plus ">+</button>
                         </div>
-                        <div class="totalAmout" th:text="totalPrice">
-                            <p th:text="${#numbers.formatDecimal(total, 1, 'DEFAULT', 2, 'DEFAULT')}+€" th:with="totalCount=${total + total}"></p>
+                        <!-- <div class="totalAmout" th:text="totalPrice"> -->
+                        <div class="totalAmout" th:with="total=${orderProduct.qty * orderProduct.price}">
+                            <p th:text="${#numbers.formatDecimal(total, 1, 'DEFAULT', 2, 'DEFAULT')}+€"></p>
                         </div>
                         <div class="wraperCross">
-                            <!-- <i th:if="${orderProduct.quantity gt 1}" class="fa fa-times crossDelete" th:onclick=" 'javascript:deleteProducts(' + ${orderProduct.id_orderproduct} + ')' "></i> -->
+                            <i class="fa fa-times crossDelete" th:onclick="'javascript:addNewProduct(' + ${product.id} + ')'"></i>
                         </div>
                     </div>
                     <div class="h5 mt-2 mb-4 pt-3 wrapperTotalPrice" th:object="${totalAmountPrice}">

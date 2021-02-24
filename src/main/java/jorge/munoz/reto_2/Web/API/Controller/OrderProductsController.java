@@ -3,11 +3,13 @@ package jorge.munoz.reto_2.Web.API.Controller;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import jorge.munoz.reto_2.Services.OrderProductsService;
 import jorge.munoz.reto_2.Services.Models.OrderProductDTO;
@@ -41,8 +43,14 @@ public class OrderProductsController {
     */
     @PostMapping("/orderproduct")
     public OrderProductDTO AddOrderProduct(@RequestBody OrderProductDTO orderproduct) {
-        return orderproductsService.add(orderproduct);
+       try {
+           return orderproductsService.add(orderproduct);
+       } catch (Exception e) {
+            throw new ResponseStatusException(
+            HttpStatus.BAD_REQUEST, "Error adding new data", e);
+       } 
     }
+        
 
     @PutMapping("/update/{id}")
     public Optional<OrderProductDTO> UpdateOrderProduct(@RequestBody OrderProductDTO orderproduct, @PathVariable("id") Long id) {
