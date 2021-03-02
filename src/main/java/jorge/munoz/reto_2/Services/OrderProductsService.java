@@ -7,6 +7,8 @@ import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
 
 import jorge.munoz.reto_2.Repositories.Entities.OrderProductEntity;
 import jorge.munoz.reto_2.Repositories.Interfaces.OrderProductsRepository;
@@ -21,7 +23,7 @@ public class OrderProductsService {
     @Autowired
     private ModelMapper modelMappper;
 
-    public List<OrderProductDTO> getAll() throws EcommerceException {
+    public List<OrderProductDTO> getAll() throws ResponseStatusException {
         
         List<OrderProductDTO> milista = orderProductsRepository.findAll().stream()
         .map(x -> modelMappper.map(x, OrderProductDTO.class))
@@ -30,7 +32,7 @@ public class OrderProductsService {
         if(!milista.isEmpty()){
             return milista;
         }else{
-            throw new EcommerceException("No se ha podido encontrar el order product"); 
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error finding data");
         }
     }
 
@@ -55,12 +57,12 @@ public class OrderProductsService {
 
     
 
-    public OrderProductDTO findbyId(Long id) throws EcommerceException{
+    public OrderProductDTO findbyId(Long id) throws ResponseStatusException{
         Optional<OrderProductEntity> entity = orderProductsRepository.findById(id);
         if(entity.isPresent()){
             return modelMappper.map(entity.get(), OrderProductDTO.class);
         }else{
-            throw new EcommerceException("No se ha podido encontrar el order product"); 
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error finding data");
         }
     }
 
@@ -86,17 +88,17 @@ public class OrderProductsService {
         return e;
     }
 
-    public void delete(Long ID) throws EcommerceException {
+    public void delete(Long ID) throws ResponseStatusException{
         Optional<OrderProductEntity> entityToDelete = orderProductsRepository.findById(ID);
         if(entityToDelete.isPresent()){
             orderProductsRepository.delete(entityToDelete.get());
         }else{
-            throw new EcommerceException("No se ha podido eliminar el order product"); 
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Error deletting new data");
         }
 
     }
 
-    public void deleteByIdProduct(Long id) throws EcommerceException {
+    public void deleteByIdProduct(Long id) throws ResponseStatusException {
 
         Optional<OrderProductEntity> entityToDelete = orderProductsRepository.findById(id);
         
@@ -104,7 +106,7 @@ public class OrderProductsService {
             orderProductsRepository.deleteById(entityToDelete.get().getId());
         }
         else{
-            throw new EcommerceException("No se ha encontrado ese producto"); 
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Error deletting new data"); 
         }
         
         
