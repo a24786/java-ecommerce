@@ -21,10 +21,17 @@ public class OrderProductsService {
     @Autowired
     private ModelMapper modelMappper;
 
-    public List<OrderProductDTO> getAll(){
-        return orderProductsRepository.findAll().stream()
+    public List<OrderProductDTO> getAll() throws EcommerceException {
+        
+        List<OrderProductDTO> milista = orderProductsRepository.findAll().stream()
         .map(x -> modelMappper.map(x, OrderProductDTO.class))
         .collect(Collectors.toList());
+
+        if(!milista.isEmpty()){
+            return milista;
+        }else{
+            throw new EcommerceException("No se ha podido encontrar el order product"); 
+        }
     }
 
     public OrderProductDTO add(OrderProductDTO order){
@@ -46,19 +53,14 @@ public class OrderProductsService {
         return Optional.empty();
     }
 
-    public void delete(Long ID){
-        Optional<OrderProductEntity> entityToDelete = orderProductsRepository.findById(ID);
-        if(entityToDelete.isPresent()){
-            orderProductsRepository.delete(entityToDelete.get());
-        }
-    }
+    
 
-    public OrderProductDTO findbyId(Long id){
+    public OrderProductDTO findbyId(Long id) throws EcommerceException{
         Optional<OrderProductEntity> entity = orderProductsRepository.findById(id);
         if(entity.isPresent()){
             return modelMappper.map(entity.get(), OrderProductDTO.class);
         }else{
-            return null;
+            throw new EcommerceException("No se ha podido encontrar el order product"); 
         }
     }
 
@@ -79,9 +81,33 @@ public class OrderProductsService {
         Collection<Object[]> a = orderProductsRepository.getCartData(3L);
 
         List<AuxDTO> e = a.stream()
-        .map(x->new AuxDTO( (String) x[0], (int)x[1], (double)x[2]))
+        .map(x->new AuxDTO( (String) x[0], (int)x[1], (double)x[2],  (Long)x[3]))
         .collect(Collectors.toList());
         return e;
+    }
+
+    public void delete(Long ID) throws EcommerceException {
+        Optional<OrderProductEntity> entityToDelete = orderProductsRepository.findById(ID);
+        if(entityToDelete.isPresent()){
+            orderProductsRepository.delete(entityToDelete.get());
+        }else{
+            throw new EcommerceException("No se ha podido eliminar el order product"); 
+        }
+
+    }
+
+    public void deleteByIdProduct(Long id) throws EcommerceException {
+
+        Optional<OrderProductEntity> entityToDelete = orderProductsRepository.findById(id);
+        
+        if(entityToDelete.isPresent()){
+            orderProductsRepository.deleteById(entityToDelete.get().getId());
+        }
+        else{
+            throw new EcommerceException("No se ha encontrado ese producto"); 
+        }
+        
+        
     }
     
 

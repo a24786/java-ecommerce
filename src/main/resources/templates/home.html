@@ -49,7 +49,7 @@
                             <p th:text="${#numbers.formatDecimal(total, 1, 'DEFAULT', 2, 'DEFAULT')}+€"></p>
                         </div>
                         <div class="wraperCross">
-                            <i class="fa fa-times crossDelete" th:onclick="'javascript:addNewProduct(' + ${product.id} + ')'"></i>
+                            <i class="fa fa-times crossDelete" th:onclick="'javascript:deleteProduct(' +  ${orderProduct.id} + ')'"></i>
                         </div>
                     </div>
                     <div class="h5 mt-2 mb-4 pt-3 wrapperTotalPrice" th:object="${totalAmountPrice}">

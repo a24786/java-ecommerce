@@ -18,7 +18,7 @@ function addNewProduct(id_product) {
             var qty = 1;
             fetch(url, {
                 method: 'POST',
-                body: JSON.stringify({ "idProduct": 1, "qty": 1, "idOrder": orderID }),
+                body: JSON.stringify({ "idProduct": id_product, "qty": 1, "idOrder": orderID }),
                 headers: {
                     'Content-Type': 'application/json'
                 }
@@ -31,8 +31,8 @@ function addNewProduct(id_product) {
 
 }
 
-function deleteProducts(id) {
-    fetch('/orderproducts/' + id, {
+function deleteProduct(id) {
+    fetch('/orderproducts/v1/delete/' + id + '/product', {
             method: 'DELETE',
         })
         .then(res => res.text())

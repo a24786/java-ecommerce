@@ -15,10 +15,13 @@ public interface OrderProductsRepository
         @Query(value = "SELECT SUM(p.price*op.qty) FROM Productsreto p JOIN Orderproducts op ON op.idProduct = p.id where op.idOrder =:idOrder")
         Collection<Long> countTotalPrice(@Param("idOrder")Long idOrder);
 
-        @Query(value = "SELECT p.name, op.qty, p.price FROM Productsreto p JOIN Orderproducts op ON op.idProduct = p.id WHERE op.idOrder =:idOrder")
+        @Query(value = "SELECT p.name, op.qty, p.price, op.id FROM Productsreto p JOIN Orderproducts op ON op.idProduct = p.id WHERE op.idOrder =:idOrder")
         Collection<Object[]> getCartData(@Param("idOrder")Long idOrder);
 
         @Query(value = "SELECT p FROM Productsreto p JOIN Orderproducts op ON op.idProduct = p.id WHERE op.idOrder = :id")
         Collection<ProductEntity> findByOrderId(@Param("id")Long id);
+
+        @Query(value = "SELECT op FROM Orderproducts op WHERE op.idProduct = :id")
+        Collection<OrderProductEntity> findByProductId(@Param("id")Long idProduct);
 
 }
