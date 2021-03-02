@@ -6,7 +6,7 @@ function reload() {
     location.href = url;
 }
 
-function incrementQty(id_product) {
+function addNewProduct(id_product) {
 
     let url = '/orderproducts/v1/orderproduct'
 
