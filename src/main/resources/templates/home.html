@@ -42,7 +42,7 @@
                         <div class="selector ">
                             <button type="button " name="less" class="less ">-</button>
                             <p th:text="*{qty}" class="qtyNumber "></p>
-                            <button type="button " name="plus" class="plus ">+</button>
+                            <button type="button " name="plus" class="plus" th:onclick=" 'javascript:incrementQty(' + ${orderProduct.product.id_product} + ')' ">+</button>
                         </div>
                         <!-- <div class="totalAmout" th:text="totalPrice"> -->
                         <div class="totalAmout" th:with="total=${orderProduct.qty * orderProduct.price}">
