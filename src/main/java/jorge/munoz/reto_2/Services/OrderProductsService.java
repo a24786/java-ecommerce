@@ -1,14 +1,18 @@
 package jorge.munoz.reto_2.Services;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
 
 import jorge.munoz.reto_2.Repositories.Entities.OrderProductEntity;
 import jorge.munoz.reto_2.Repositories.Interfaces.OrderProductsRepository;
+import jorge.munoz.reto_2.Services.Models.AuxDTO;
 import jorge.munoz.reto_2.Services.Models.OrderProductDTO;
 import jorge.munoz.reto_2.Services.Models.ProductDTO;
 
@@ -19,10 +23,17 @@ public class OrderProductsService {
     @Autowired
     private ModelMapper modelMappper;
 
-    public List<OrderProductDTO> getAll(){
-        return orderProductsRepository.findAll().stream()
+    public List<OrderProductDTO> getAll() throws ResponseStatusException {
+        
+        List<OrderProductDTO> milista = orderProductsRepository.findAll().stream()
         .map(x -> modelMappper.map(x, OrderProductDTO.class))
         .collect(Collectors.toList());
+
+        if(!milista.isEmpty()){
+            return milista;
+        }else{
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error finding data");
+        }
     }
 
     public OrderProductDTO add(OrderProductDTO order){
@@ -44,19 +55,14 @@ public class OrderProductsService {
         return Optional.empty();
     }
 
-    public void delete(Long ID){
-        Optional<OrderProductEntity> entityToDelete = orderProductsRepository.findById(ID);
-        if(entityToDelete.isPresent()){
-            orderProductsRepository.delete(entityToDelete.get());
-        }
-    }
+    
 
-    public OrderProductDTO findbyId(Long id){
+    public OrderProductDTO findbyId(Long id) throws ResponseStatusException{
         Optional<OrderProductEntity> entity = orderProductsRepository.findById(id);
         if(entity.isPresent()){
             return modelMappper.map(entity.get(), OrderProductDTO.class);
         }else{
-            return null;
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error finding data");
         }
     }
 
@@ -73,10 +79,38 @@ public class OrderProductsService {
         .findFirst().get();
     }
 
-    // public Long getTotalQty(Long id){
-    //     return orderProductsRepository.countTotalPrice(3).stream()
-    //     .findFirst().get();
-    // }
+    public List<AuxDTO> getCartData(Long id){
+        Collection<Object[]> a = orderProductsRepository.getCartData(3L);
+
+        List<AuxDTO> e = a.stream()
+        .map(x->new AuxDTO( (String) x[0], (int)x[1], (double)x[2],  (Long)x[3]))
+        .collect(Collectors.toList());
+        return e;
+    }
+
+    public void delete(Long ID) throws ResponseStatusException{
+        Optional<OrderProductEntity> entityToDelete = orderProductsRepository.findById(ID);
+        if(entityToDelete.isPresent()){
+            orderProductsRepository.delete(entityToDelete.get());
+        }else{
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Error deletting new data");
+        }
+
+    }
+
+    public void deleteByIdProduct(Long id) throws ResponseStatusException {
+
+        Optional<OrderProductEntity> entityToDelete = orderProductsRepository.findById(id);
+        
+        if(entityToDelete.isPresent()){
+            orderProductsRepository.deleteById(entityToDelete.get().getId());
+        }
+        else{
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Error deletting new data"); 
+        }
+        
+        
+    }
     
 
 }
