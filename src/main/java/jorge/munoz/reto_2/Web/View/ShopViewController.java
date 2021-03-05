@@ -15,12 +15,10 @@ import jorge.munoz.reto_2.Services.ProductsService;
 public class ShopViewController {
     private final ProductsService productsService;
     private final OrderProductsService orderproductsService;
-    private final OrdersService ordersService;
 
     ShopViewController(ProductsService productsService, OrderProductsService orderproductsService, OrdersService ordersService ){
         this.productsService = productsService;
         this.orderproductsService = orderproductsService;
-        this.ordersService = ordersService;
     }
 
     @GetMapping("/home")
@@ -32,8 +30,4 @@ public class ShopViewController {
         mv.addObject("ordersProduct", orderproductsService.getCartData(3L));
         return mv;
     }
-
-
-    // Password1
-
 }
